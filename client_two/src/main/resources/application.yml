@@ -1,0 +1,15 @@
+server:
+  port: 5000
+  servlet:
+    session:
+      cookie:
+        name: client2
+security:
+  oauth2:
+    client:
+      client-id: noel
+      client-secret: 123123
+      user-authorization-uri: http://localhost:5002/auth/oauth/authorize
+      access-token-uri: http://localhost:5002/auth/oauth/token
+    resource:
+      user-info-uri: http://localhost:5002/auth/user
