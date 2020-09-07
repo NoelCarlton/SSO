@@ -2,3 +2,33 @@ server:
   port: 5002
   servlet:
     context-path: /auth
+
+#######thymeleaf#########
+# 模板的模式
+spring:
+  thymeleaf:
+    cache: false # 这个开发配置为false，避免改了模板还要重启服务器
+    mode: HTML5
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  mvc:
+    static-path-pattern: /static/**
+  datasource:
+    url: jdbc:mysql://192.168.31.76:3306/spring_oauth?useUnicode=true&charset=utf-8&useAffectedRows=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: auther
+    password: 123123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+#######thymeleaf#########

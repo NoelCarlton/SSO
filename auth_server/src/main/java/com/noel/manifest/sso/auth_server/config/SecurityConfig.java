@@ -30,19 +30,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/check.html");
+    protected void configure(HttpSecurity http) throws Exception {
+        http.requestMatchers()
+                .antMatchers("/login","/oauth/authorize","/docheck","/register")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/register").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/docheck").loginProcessingUrl("/login").permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
-                .antMatchers("/login","/oauth/authorize")
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/check.html").loginProcessingUrl("/login").permitAll()
-                .and()
-                .csrf().disable();
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/static/**");
     }
 }
