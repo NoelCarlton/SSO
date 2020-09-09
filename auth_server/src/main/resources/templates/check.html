@@ -77,12 +77,15 @@
                     url: "/auth/register",
                     data: $("#register-form").serialize(),
                     success: function(result){
-                        console.log("操作成功");
                         console.log(result);
-                        alert(result.success);
-                        if(result.success== "register"){
+                        if(result.success === "register"){
+                            console.log("操作成功");
+                            alert(result.success);
                             $("#login").toggle();
                             $("#register").toggle();
+                        }
+                        if(result.error === "用户已存在"){
+                            alert("用户已存在");
                         }
                     },
                     error: function(error){

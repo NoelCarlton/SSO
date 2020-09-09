@@ -18,17 +18,24 @@ spring:
   mvc:
     static-path-pattern: /static/**
   datasource:
-    url: jdbc:mysql://192.168.31.76:3306/spring_oauth?useUnicode=true&charset=utf-8&useAffectedRows=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:log4jdbc:mysql://192.168.31.76:3306/spring_oauth?useUnicode=true&characterEncoding=UTF-8&useAffectedRows=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: auther
     password: 123123
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      init-s-q-l: SET NAMES utf8 COLLATION utf8_generial_ci
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: mysql
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
 
 #######thymeleaf#########

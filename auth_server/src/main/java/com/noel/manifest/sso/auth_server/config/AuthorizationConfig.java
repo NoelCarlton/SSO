@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
+import javax.sql.DataSource;
+
 /**
  * @Description
  * @Author noel
@@ -16,6 +18,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    DataSource dataSource;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -31,4 +36,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .accessTokenValiditySeconds(7200)
                 .authorizedGrantTypes("authorization_code");
     }
+
+
 }
