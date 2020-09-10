@@ -82,42 +82,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/docheck")
                 .loginProcessingUrl("/login")
-                .successHandler((req,resp, authentication)->{
-                    Object principal = authentication.getPrincipal();
-                    resp.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = resp.getWriter();
-                    out.write(new ObjectMapper().writeValueAsString(principal));
-                    out.flush();
-                    out.close();
-                })
-                .failureHandler((req, resp, e) -> {
-                    resp.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = resp.getWriter();
-                    out.write(e.getMessage());
-                    out.flush();
-                    out.close();
-                })
+//                .successHandler((req,resp, authentication)->{
+//                    Object principal = authentication.getPrincipal();
+//                    resp.setContentType("application/json;charset=utf-8");
+//                    PrintWriter out = resp.getWriter();
+//                    out.write(new ObjectMapper().writeValueAsString(principal));
+//                    out.flush();
+//                    out.close();
+//                })
+//                .failureHandler((req, resp, e) -> {
+//                    resp.setContentType("application/json;charset=utf-8");
+//                    PrintWriter out = resp.getWriter();
+//                    out.write(e.getMessage());
+//                    out.flush();
+//                    out.close();
+//                })
                 .permitAll()
                 .and()
                 .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((req,resp, authException)->{
-                    resp.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = resp.getWriter();
-                    out.write("尚未登录，请先登录");
-                    out.flush();
-                    out.close();
-                })
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessHandler((req,resp,authentication)->{
-                    resp.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = resp.getWriter();
-                    out.write("注销成功");
-                    out.flush();
-                    out.close();
-                }).permitAll();
+//                .exceptionHandling()
+//                .authenticationEntryPoint((req,resp, authException)->{
+//                    resp.setContentType("application/json;charset=utf-8");
+//                    PrintWriter out = resp.getWriter();
+//                    out.write("尚未登录，请先登录");
+//                    out.flush();
+//                    out.close();
+//                })
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessHandler((req,resp,authentication)->{
+//                    resp.setContentType("application/json;charset=utf-8");
+//                    PrintWriter out = resp.getWriter();
+//                    out.write("注销成功");
+//                    out.flush();
+//                    out.close();
+//                }).permitAll()
+                    ;
     }
 
     @Override

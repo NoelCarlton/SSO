@@ -3,6 +3,7 @@ package com.noel.manifest.sso.auth_server.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @Description
@@ -12,7 +13,7 @@ import javax.persistence.*;
  **/
 @Entity(name = "t_role")
 @Data
-public class RoleModel {
+public class RoleModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

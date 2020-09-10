@@ -6,6 +6,7 @@ import com.noel.manifest.sso.auth_server.model.UserModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ class AuthServerApplicationTests {
     @Autowired
 UserDao userDao;
 
+    @Test
+    void showPass(){
+        System.out.print(new BCryptPasswordEncoder().encode("123123"));
+    }
     @Test
     void contextLoads() {
         UserModel u1 = new UserModel();
