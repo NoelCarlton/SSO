@@ -78,13 +78,12 @@
                     data: $("#register-form").serialize(),
                     success: function(result){
                         console.log(result);
-                        if(result.success === "register"){
-                            console.log("操作成功");
-                            alert(result.success);
+                        if(result.data === "register"){
+                            alert(result.data);
                             $("#login").toggle();
                             $("#register").toggle();
                         }
-                        if(result.error === "用户已存在"){
+                        if(result.data === "用户已存在"){
                             alert("用户已存在");
                         }
                     },

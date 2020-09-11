@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,13 +54,13 @@ public class IndexController {
     @PostMapping("/register")
     @ResponseBody
     public Map<String, String> register(@RequestParam("username") String name,
-                           @RequestParam("password") String password) {
+                                        @RequestParam("password") String password, HttpServletResponse response) {
         Map<String, String> result = new HashMap<>();
         log.debug("注册...%s,%s", name, password);
         System.out.printf("注册...%s,%s", name, password);
         UserModel user = userDao.findUserModelByUsername(name);
         if(user!=null){
-            result.put("error","用户已存在");
+            result.put("data","用户已存在");
         }else {
             user = new UserModel();
             user.setUsername(name);
@@ -77,9 +78,8 @@ public class IndexController {
             rs1.add(r1);
             user.setRoles(rs1);
             userDao.save(user);
-            result.put("success", "register");
+            result.put("data", "注册成功");
         }
         return result;
     }
-
 }

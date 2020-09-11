@@ -1,0 +1,28 @@
+server:
+  port: 5003
+  servlet:
+    session:
+      cookie:
+        name: register
+security:
+  oauth2:
+    client:
+      client-id: register
+      client-secret: 123
+      user-authorization-uri: http://192.168.31.43:5002/auth/oauth/authorize
+      access-token-uri: http://192.168.31.43:5002/auth/oauth/token
+    resource:
+      user-info-uri: http://192.168.31.43:5002/auth/user
+
+spring:
+  thymeleaf:
+    cache: false # 这个开发配置为false，避免改了模板还要重启服务器
+    mode: HTML5
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  mvc:
+    static-path-pattern: /static/**
