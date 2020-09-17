@@ -1,11 +1,16 @@
 package com.noel.sso.client_register.controller;
 
+import com.noel.sso.client_register.dao.ClientDetailsDao;
+import com.noel.sso.client_register.model.ClientDetailsModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @Description
@@ -15,6 +20,9 @@ import java.util.Arrays;
  **/
 @Controller
 public class RegisterController {
+
+    @Autowired
+    ClientDetailsDao clientDetailsDao;
 
     @GetMapping("/hello")
     @ResponseBody
@@ -29,6 +37,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
+    @ResponseBody
     public String doRegister(
             @RequestParam("client_id")String clientId,
             @RequestParam("secret")String secret,
@@ -37,6 +46,16 @@ public class RegisterController {
             @RequestParam("grant_types")String grantType,
             @RequestParam("redirect_uri")String redirectUri
     ){
-        return "success";
+        ClientDetailsModel client = new ClientDetailsModel();
+        System.out.println("clientId = [" + clientId + "], secret = [" + secret + "], resourceId = [" + resourceId + "], scope = [" + scope + "], grantType = [" + grantType + "], redirectUri = [" + redirectUri + "]");
+//        client.setClient_id(clientId);
+        client.setClient_secret(new BCryptPasswordEncoder().encode(secret));
+        client.setResource_ids(resourceId);
+        client.setScope(scope);
+        client.setAuthorized_grant_types(grantType);
+        client.setWeb_server_redirect_uri(redirectUri);
+        ClientDetailsModel clientDetailsModel = clientDetailsDao.save(client);
+        System.out.println(clientDetailsModel.toString());
+        return null == clientDetailsModel ? "false" : "success";
     }
 }
