@@ -14,10 +14,10 @@
     </div>
     <div class="panel-body">
         <form action="#" id="register-form" class="form-horizontal">
-                <div class="form-group">
-                    <label for="client_id">客 户 端 编 号</label>
-                    <input class="form-control" type="text" id="client_id" name="client_id" placeholder="客户端编号">
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label for="client_id">客 户 端 编 号</label>-->
+                    <!--<input class="form-control" type="text" id="client_id" name="client_id" placeholder="客户端编号">-->
+                <!--</div>-->
                 <div class="form-group">
                     <label for="password">客 户 端 密 码</label>
                     <input class="form-control" type="password" id="password" name="secret" placeholder="客户端密码">
@@ -71,6 +71,13 @@
         </form>
     </div>
 </div>
+<div id="client-info">
+    <h1>恭喜注册成功，请牢记以下客户端编号</h1>
+    <div class="form-group">
+        <label for="client-id">客户id</label>
+        <input type="text" id="client-id" class="form-control" readonly>
+    </div>
+</div>
 </body>
 <style>
     .register-form-div{
@@ -87,16 +94,27 @@
     .form-group>label{
         font-weight: bold;
     }
+    #client-info{
+        width: 600px;
+        margin: 0 auto;
+    }
 </style>
 <script>
+    $(function () {
+        $("#client-info").hide();
+    })
 $("#submit").click(function () {
-    console.log("信息提交中....")
+    console.log("信息提交中....");
     $.post({
         url:"/register",
         dataType: "JSON",
         data: $("#register-form").serialize(),
         success: function (data) {
             console.log(data);
+            if(data.code===2000){
+                $("#client-id").val(data.data.info.client_id);
+                $("#client-info").show();
+            }
         },
         error: function (data) {
             console.log(data);

@@ -1,5 +1,6 @@
 package com.noel.sso.client_register.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,6 +27,7 @@ public class ClientDetailsModel implements Serializable {
     private String resource_ids;
 
     @Column(length = 100, name = "client_secret")
+    @JsonIgnore
     private String client_secret;
 
     @Column(length = 10, name = "scope")
@@ -38,7 +40,7 @@ public class ClientDetailsModel implements Serializable {
     private String web_server_redirect_uri;
 
     @Column(name = "autoapprove")
-    private Boolean autoapprove;
+    private String autoapprove;
 
 
 }

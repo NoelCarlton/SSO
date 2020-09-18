@@ -1,0 +1,15 @@
+server:
+  port: 5005
+  servlet:
+    session:
+      cookie:
+        name: tester
+security:
+  oauth2:
+    client:
+      client-id: 40289fab749fc04601749fde384e0002
+      client-secret: 123345
+      user-authorization-uri: http://192.168.31.43:5002/auth/oauth/authorize
+      access-token-uri: http://192.168.31.43:5002/auth/oauth/token
+    resource:
+      user-info-uri: http://192.168.31.43:5002/auth/user
